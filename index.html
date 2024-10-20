@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            min-height: 100vh; /* 高さを自動に設定 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(252, 255, 235);
+            position: relative;
+            overflow-y: auto; /* スクロールを許可 */
+        }
+
+        .container {
+            color: pink;
+            margin: 10px;
+        }
+
+        h1, h2, h3 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: orange;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        canvas, #video {
+          position: absolute;
+    top: 10%; /* 上からの位置を調整 */
+    left: 50%; /* 左からの位置を調整 */
+    transform: translateX(-50%); /* 中央に配置 */
+        }
+
+        #Sentence, #setumei, #detections {
+            width: 90%;
+            max-width: 600px;
+            margin: 10px auto;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #Sentence {
+            font-size: 12px;
+            word-wrap: break-word;
+        }
+
+        #setumei {
+            font-size: 14px;
+        }
+
+        #detections {
+            color: blue;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #QR img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .container button {
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="detections"></div>
+    <div class="container">
+        <h3>0</h3>
+        <button id="increment">+</button>
+        <button id="reset">reset</button>
+    </div>
+    <h1>自動文字サイズ補正サイトのシステムに関する研究</h1>
+    <h2>先生との出会い</h2>
+    <h3></h3>
+    <div id="QR">
+        <img src="QR.png" alt="QR Code">
+    </div>
+
+    <div id="setumei">
+        <p>
+            この研究はWebサイト上の自動フォントサイズ調整機能について研究を行っています。日頃フォントサイズが小さいとなったときに手動で
+            フォントサイズを変更する必要があります。それらを自動で行うために必要な研究です。
+            <br> 以下の文章を読んでいただきます。
+        </p>
+    </div>
+
+    <div id="Sentence">
+        <budoux-ja>私《わたくし》はその人を常に先生と呼んでいた。だからここでもただ先生と書くだけで本名は打ち明けない。
+        これは世間を憚《はば》かる遠慮というよりも、その方が私にとって自然だからである。私はその人の記憶を呼び起すごとに、すぐ「先生」といいたくなる。
+        筆を執《と》っても心持は同じ事である。よそよそしい頭文字《かしらもじ》などはとても使う気にならない。
+        私が先生と知り合いになったのは鎌倉《かまくら》である。その時私はまだ若々しい書生であった。
+        暑中休暇を利用して海水浴に行った友達からぜひ来いという端書《はがき》を受け取ったので、私は多少の金を工面《くめん》して、出掛ける事にした。
+        私は金の工面に二《に》、三日《さんち》を費やした。ところが私が鎌倉に着いて三日と経《た》たないうちに、
+        私を呼び寄せた友達は、急に国元から帰れという電報を受け取った。電報には母が病気だからと断ってあったけれども友達はそれを信じなかった。
+        友達はかねてから国元にいる親たちに勧《すす》まない結婚を強《し》いられていた。彼は現代の習慣からいうと結婚するにはあまり年が若過ぎた。
+        それに肝心《かんじん》の当人が気に入らなかった。それで夏休みに当然帰るべきところを、わざと避けて東京の近くで遊んでいたのである。彼は電報を私に見せてどうしようと相談をした。
+        私にはどうしていいか分らなかった。けれども実際彼の母が病気であるとすれば彼は固《もと》より帰るべきはずであった。それで彼はとうとう帰る事になった。せっかく来た私は一人取り残された。
+        学校の授業が始まるにはまだ大分《だいぶ》日数《ひかず》があるので鎌倉におってもよし、帰ってもよいという境遇にいた私は、当分元の宿に留《と》まる覚悟をした。
+        友達は中国のある資産家の息子《むすこ》で金に不自由のない男であったけれども、学校が学校なのと年が年なので、生活の程度は私とそう変りもしなかった。
+        したがって一人《ひとり》ぼっちになった私は別に恰好《かっこう》な宿を探す面倒ももたなかったのである。</budoux-ja>
+    </div>
+    <video id="video" width="320" height="240" autoplay muted playsinline></video>
+    <canvas id="canvas" width="320" height="240"></canvas> 
+
+    <script>
+        window.onload = function() {
+            const video = document.getElementById('video');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.error("カメラの起動に失敗しました: ", err);
+                });
+        };
+    </script>
+</body>
+</html>
