@@ -30,9 +30,11 @@ video.addEventListener('loadedmetadata', () => {
   const displaySize = { width: video.videoWidth, height: video.videoHeight };
   
   // Canvasのサイズをビデオに合わせる
-  canvas.width = displaySize.width;
-  canvas.height = displaySize.height;
-  faceapi.matchDimensions(canvas, displaySize);
+  const resizedDetections = faceapi.resizeResults(detections, {
+    width: video.videoWidth,
+    height: video.videoHeight
+  });
+    faceapi.matchDimensions(canvas, displaySize);
 
   setInterval(async () => {
     if (!isProcessing) {
@@ -43,10 +45,11 @@ video.addEventListener('loadedmetadata', () => {
         .withFaceExpressions()
         .withAgeAndGender();
 
-      const resizedDetections = faceapi.resizeResults(detections, displaySize);
+        const resizedDetections = faceapi.resizeResults(detections, displaySize);
 
-      // Canvasをクリア
-      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+
+     const context = canvas.getContext('2d');
+     context.clearRect(0, 0, canvas.width, canvas.height);
 
       // 顔のボックスと感情を描画
       faceapi.draw.drawDetections(canvas, resizedDetections);
@@ -63,6 +66,9 @@ video.addEventListener('loadedmetadata', () => {
         if (maxEmotion === 'sad') {
           increaseFontSize();
         }
+        else if(maxEmotion == 'surprised'){
+          StopFontSize();
+        }
       });
 
       isProcessing = false;
@@ -76,3 +82,11 @@ function increaseFontSize() {
   const newFontSize = currentFontSize + 0.12;
   sentenceElement.style.fontSize = newFontSize + 'px';
 }
+
+function StopFontSize(){
+ 
+ 
+ 
+ }
+
+
