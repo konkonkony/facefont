@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             width: 100vw;
-            min-height: 100vh; /* 高さを自動に設定 */
+           min-height: 100vh; /* 高さを自動に設定 */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -23,14 +23,36 @@
             overflow-y: auto; /* スクロールを許可 */
         }
 
-        .container {
-            color: pink;
-            margin: 10px;
+        /* .container { */
+            /* color: pink; */
+            /* margin: 10px; */
+        /* } */
+
+        #canvas {
+            position: absolute;
+    width: 100%;
+    max-width: 320px;
+    top: -20px;
+    margin: 20px 0;
+    object-fit: contain;
         }
+        
+        video{
+
+            width: 100%;
+max-width: 320px;
+top: 20px;
+margin: 20px 0;
+object-fit: contain;
+
+         }
+
+
 
         h1, h2, h3 {
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
+            
         }
 
         h1 {
@@ -46,13 +68,6 @@
 
         h3 {
             margin-bottom: 10px;
-        }
-
-        canvas, #video {
-          position: absolute;
-    top: 10%; /* 上からの位置を調整 */
-    left: 50%; /* 左からの位置を調整 */
-    transform: translateX(-50%); /* 中央に配置 */
         }
 
         #Sentence, #setumei, #detections {
@@ -89,6 +104,9 @@
     </style>
 </head>
 <body>
+    <video id="video" autoplay muted playsinline></video>
+<canvas id="canvas"></canvas>
+
     <div id="detections"></div>
     <div class="container">
         <h3>0</h3>
@@ -125,8 +143,8 @@
         友達は中国のある資産家の息子《むすこ》で金に不自由のない男であったけれども、学校が学校なのと年が年なので、生活の程度は私とそう変りもしなかった。
         したがって一人《ひとり》ぼっちになった私は別に恰好《かっこう》な宿を探す面倒ももたなかったのである。</budoux-ja>
     </div>
-    <video id="video" width="320" height="240" autoplay muted playsinline></video>
-    <canvas id="canvas" width="320" height="240"></canvas> 
+   
+   
 
     <script>
         window.onload = function() {
