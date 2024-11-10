@@ -63,7 +63,10 @@ video.addEventListener('loadedmetadata', () => {
         detectionsDiv.innerHTML = `表情: ${maxEmotion}, 年齢: ${Math.round(detection.age)}, 性別: ${detection.gender}`;
         
         // "sad"な表情があればフォントサイズを増加
-        if (maxEmotion === 'sad') {
+        if (maxEmotion === 'sad' ) {
+          increaseFontSize();
+        }
+        else if(maxEmotion ==='angry'){
           increaseFontSize();
         }
         else if(maxEmotion == 'surprised'){
@@ -79,7 +82,7 @@ video.addEventListener('loadedmetadata', () => {
 // フォントサイズを増加させる関数
 function increaseFontSize() {
   const currentFontSize = parseFloat(window.getComputedStyle(sentenceElement).fontSize);
-  const newFontSize = currentFontSize + 0.12;
+  const newFontSize = currentFontSize + 0.24;
   sentenceElement.style.fontSize = newFontSize + 'px';
 }
 
