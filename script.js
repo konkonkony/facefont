@@ -66,9 +66,6 @@ video.addEventListener('loadedmetadata', () => {
         if (maxEmotion === 'sad' ) {
           increaseFontSize();
         }
-        else if(maxEmotion ==='angry'){
-          increaseFontSize();
-        }
         else if(maxEmotion == 'surprised'){
           StopFontSize();
         }
